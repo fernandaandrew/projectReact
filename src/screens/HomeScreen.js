@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, {useContext,useState,useEffect} from 'react';
 import {Button, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -37,20 +36,10 @@ const HomeScreen = ({navigation,route}) => {
       navigation?.navigate('LOGIN')
     }
   },[userInfo])
-=======
-import React, {useContext} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
-import {AuthContext} from '../context/AuthContext';
-
-const HomeScreen = () => {
-  const {userInfo, isLoading, logout} = useContext(AuthContext);
->>>>>>> 1d78b5df64403e62a75026d5a6657d0dedab24f2
 
   return (
     <View style={styles.container}>
       <Spinner visible={isLoading} />
-<<<<<<< HEAD
       <View style={{width:'100%',flexDirection:'row'}}>
         <View style={{flex:2}}>
           <TouchableOpacity style={{backgroundColor:'red',padding:5,margin:15, borderRadius:20,}} onPress={logout} >
@@ -75,10 +64,6 @@ const HomeScreen = () => {
             </View>
         ))
       }
-=======
-      <Text style={styles.welcome}>Welcome {userInfo.user.name}</Text>
-      <Button title="Logout" color="red" onPress={logout} />
->>>>>>> 1d78b5df64403e62a75026d5a6657d0dedab24f2
     </View>
   );
 };
@@ -86,7 +71,6 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-<<<<<<< HEAD
   },
   listItem:{
     flexDirection:'row',
@@ -106,15 +90,6 @@ const styles = StyleSheet.create({
     textAlign:'center',
     
   }
-=======
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  welcome: {
-    fontSize: 18,
-    marginBottom: 8,
-  },
->>>>>>> 1d78b5df64403e62a75026d5a6657d0dedab24f2
 });
 
 export default HomeScreen;
