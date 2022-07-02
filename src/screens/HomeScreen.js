@@ -13,23 +13,13 @@ const HomeScreen = ({navigation,route}) => {
 
   useEffect(()=>{
     axios
-      .get(`${BASE_URL}/daftar_laporan.php`)
+      .get(`${BASE_URL}/daftar_laporan.php`,{"Access-Control-Allow-Origin": "*"})
       .then(({data}) => {
         setData(data.data);
       })
       .catch(console.log);
-      console.log(route)
-  },[]);
+  },[route?.params]);
 
-  
-  useFocusEffect  (()=>{ 
-    axios
-      .get(`${BASE_URL}/daftar_laporan.php`)
-      .then(({data}) => {
-        setData(data.data);
-      })
-      .catch(console.log);
-  });
   
   useEffect(()=>{
     if(!userInfo?.username){

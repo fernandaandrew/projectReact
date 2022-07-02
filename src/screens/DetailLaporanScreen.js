@@ -1,5 +1,5 @@
 import React, {useContext,useState,useEffect} from 'react';
-import {Button, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import {Button, StyleSheet, Text, View,TouchableOpacity,Image} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 import axios from 'axios';
@@ -13,17 +13,18 @@ const DetailLaporanScreen = ({navigation,route}) => {
         id:null,
         username:'',
         tanggal:'',
+        image:'',
         deskripsi:''
     })
 
-    useFocusEffect(()=>{
+    useEffect(()=>{
         axios
         .get(`${BASE_URL}/detail_laporan.php?id=${params.id}`)
         .then(({data}) => {
             setData(data.data);
         })
         .catch(console.log);
-    });
+    },[route?.params]);
     
     const hapusLaporan=()=>{
         axios
@@ -44,9 +45,15 @@ const DetailLaporanScreen = ({navigation,route}) => {
         <View style={styles.container}>
             <Spinner visible={isLoading} />
             <View style={{flex:1, alignContent:'center',margin:20}}>
-                <View style={{flexDirection:'row',backgroundColor:'white',borderRadius:20}}>
-                    <Text style={[styles.label,{flex:2}]}>{data?.username}</Text>
-                    <Text style={[styles.label,{flex:1}]}>{data?.tanggal}</Text>
+                <View style={{backgroundColor:'white',borderRadius:20}}>
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={[styles.label,{flex:2}]}>{data?.username}</Text>
+                        <Text style={[styles.label,{flex:1}]}>{data?.tanggal}</Text>
+                    </View>
+                    
+                    {data?.image&&<View style={{margin:10,alignItems:'center'}}>
+                        <Image source={{uri:`${BASE_URL}/${data.image}?date=${new Date()}`}} style={{width:250,height:250,resizeMode:'contain',margin:15}}/>
+                    </View>}
                 </View>
                 <View style={{backgroundColor:'white',borderRadius:20,padding:10,marginVertical:10}}>
                     <Text style={[styles.label,{margin:0}]}>Deskripsi : </Text>
